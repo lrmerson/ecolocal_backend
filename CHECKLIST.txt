@@ -6,7 +6,7 @@ REQUISITOS FUNCIONAIS
 
 [✓] Expor função como endpoint HTTP GET
     - Implementado em app.py
-    - 3 endpoints REST criados
+    - 1 endpoint REST consolidado
     - Framework: Flask
 
 [✓] Padrão REST implementado
@@ -42,13 +42,12 @@ REQUISITOS FUNCIONAIS
 ENDPOINTS REST
 ==============
 
-[✓] GET /api/coleta-pontos/tipos=...
-    - Filtrado por tipo(s)
-    - Query parameter: tipos (obrigatório)
-    - Retorna JSON com metadados
-    - Status: 200 (ok), 400 (parâmetro inválido), 500 (erro)
-
 [✓] GET /api/coleta-pontos
+    - Listar todos, filtrar por tipo(s), ou paginar
+    - Query parameters: tipos, page (todos opcionais)
+    - Página padrão: 1, com 10 resultados por página
+    - Retorna JSON com metadados
+    - Status: 200 (ok), 500 (erro)
 ARQUIVOS CRIADOS
 ================
 

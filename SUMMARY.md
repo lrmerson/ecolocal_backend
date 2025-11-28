@@ -13,9 +13,8 @@
    - Docstrings completas
 
 2. **`app.py`** - Aplicação Flask (REST API)
-   - 2 endpoints REST implementados:
-     - `GET /api/coleta-pontos?tipos=...` - Filtrar por tipos
-     - `GET /api/coleta-pontos` - Listar todos (com paginação)
+   - 1 endpoint REST consolidado:
+     - `GET /api/coleta-pontos` - Listar, filtrar por tipos, e paginação
    - Tratamento completo de erros
    - Respostas em JSON estruturado
    - Status codes HTTP apropriados
@@ -110,7 +109,7 @@
 | Arquivos modificados | 2 |
 | Testes unitários | 9 |
 | Taxa de sucesso nos testes | 100% (9/9) |
-| Endpoints REST | 2 |
+| Endpoints REST | 1 |
 | Linhas de código (coleta_service.py) | 43 |
 | Linhas de código (app.py) | 130 |
 | Linhas de testes | 150+ |
@@ -180,18 +179,22 @@ print(response.json())
 ```
 Cliente HTTP (curl, requests, browser)
          ↓
+GET /api/coleta-pontos [?tipos=...] [?page=...] 
+         ↓
     [app.py - Flask]
     - Validação
     - Roteamento HTTP
+    - Paginação fixa (10 itens/página)
     - Formatação JSON
          ↓
-    [coleta_service.py]
-    - Lógica pura
+    [coleta_service.py] (se tipos fornecido)
+    - Lógica de filtro
     - Sem dependências HTTP
     - Testável
          ↓
     [pontos-de-coleta.csv]
     - Dados (119 pontos)
+    - Leituras por query
 ```
 
 ---

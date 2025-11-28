@@ -13,17 +13,14 @@
   - Docstring completa
 
 ### 2. **API REST com Flask** (`app.py`)
-Dois endpoints implementados com padrão REST:
+Um endpoint consolidado com padrão REST:
 
-#### a) `GET /api/coleta-pontos?tipos=...`
-- Filtrar pontos por tipos de lixo
-- Retorna JSON com total e lista de pontos
-- Status codes: 200 (sucesso), 400 (parâmetro inválido), 500 (erro)
-
-#### b) `GET /api/coleta-pontos`
+#### `GET /api/coleta-pontos`
 - Listar todos os pontos
-- Suporta paginação com `limit` e `offset`
-- Retorna JSON com total e lista completa
+- Filtrar por tipos de lixo (opcional)
+- Suporta paginação com `limit` e `offset` (opcional)
+- Retorna JSON com total e lista de pontos
+- Status codes: 200 (sucesso), 500 (erro)
 
 ### 3. **Testes Unitários** (`test_coleta_service.py`)
 9 testes cobrindo:
@@ -110,11 +107,17 @@ python app.py
 
 ### Exemplos de Requisição
 ```bash
+# Listar todos
+curl "http://localhost:5000/api/coleta-pontos"
+
 # Filtrar por tipo
 curl "http://localhost:5000/api/coleta-pontos?tipos=pilhas"
 
-# Listar todos com paginação
-curl "http://localhost:5000/api/coleta-pontos?limit=10&offset=0"
+# Ir para página 2
+curl "http://localhost:5000/api/coleta-pontos?page=2"
+
+# Filtrar e paginar
+curl "http://localhost:5000/api/coleta-pontos?tipos=pilhas&page=2"
 ```
 
 ## Melhorias Implementadas

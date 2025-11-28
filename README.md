@@ -18,29 +18,68 @@ python app.py
 
 A aplicação estará disponível em `http://localhost:5000`
 
-## Endpoints
+## Endpoint
 
-### 1. Filtrar pontos por tipo de lixo
+### Gerenciar Pontos de Coleta
 
 **Método:** `GET`  
-**URI:** `/api/coleta-pontos?tipos=<tipo1>,<tipo2>,...`
+**URI:** `/api/coleta-pontos`
 
 **Descrição:**  
-Retorna pontos de coleta que aceitam TODOS os tipos de lixo especificados.
+Retorna pontos de coleta com opções de filtro por tipo e paginação.
 
-**Parâmetros de Query:**
-- `tipos` (obrigatório): Lista de tipos de lixo separados por vírgula
-  - Exemplo: `eletroeletronicos,pilhas`
+**Parâmetros de Query (Todos Opcionais):**
+- `tipos`: Lista de tipos de lixo separados por vírgula (retorna pontos com TODOS os tipos)
+  - Exemplo: `?tipos=eletroeletronicos,pilhas`
+- `page`: Número da página (padrão: 1)
+  - Cada página contém 10 resultados
+  - Exemplo: `?page=2`
 
-**Exemplo de Requisição:**
+**Exemplos de Requisição:**
 ```bash
+# Listar todos os pontos (página 1)
+curl "http://localhost:5000/api/coleta-pontos"
+
+# Filtrar por tipo(s) (página 1)
 curl "http://localhost:5000/api/coleta-pontos?tipos=eletroeletronicos,pilhas"
+
+# Ir para página 2
+curl "http://localhost:5000/api/coleta-pontos?page=2"
+
+# Filtrar e ir para página 3
+curl "http://localhost:5000/api/coleta-pontos?tipos=pilhas&page=3"
 ```
 
-**Resposta (200 OK):**
+**Respostas (200 OK):**
+
+Sem filtro:
+```json
+{
+  "total": 119,
+  "page": 1,
+  "page_size": 10,
+  "total_pages": 12,
+  "pontos": [
+    {
+      "id": "001",
+      "nome": "Zero Impacto Logística Reversa",
+      "tipo_lixo": "eletroeletronicos\\,eletrodomesticos\\,pilhas",
+      "latitude": -15.762421707078582,
+      "longitude": -47.935475219000324,
+      "endereco": "Saa Q 2 SETOR DE ABASTECIMENTO..."
+    },
+    ...
+  ]
+}
+```
+
+Com filtro por tipo:
 ```json
 {
   "total": 2,
+  "page": 1,
+  "page_size": 10,
+  "total_pages": 1,
   "tipos_filtrados": ["eletroeletronicos", "pilhas"],
   "pontos": [
     {
@@ -59,48 +98,6 @@ curl "http://localhost:5000/api/coleta-pontos?tipos=eletroeletronicos,pilhas"
       "longitude": -47.899207515917645,
       "endereco": "Boulevard Shopping ST Setor..."
     }
-  ]
-}
-```
-
-**Erros:**
-- `400 Bad Request`: Parâmetro `tipos` não fornecido
-
-### 2. Listar todos os pontos de coleta
-
-**Método:** `GET`  
-**URI:** `/api/coleta-pontos`
-
-**Descrição:**  
-Retorna lista de todos os pontos de coleta com suporte a paginação.
-
-**Parâmetros de Query (Opcional):**
-- `limit`: Número máximo de resultados a retornar
-- `offset`: Número de resultados a pular (para paginação)
-
-**Exemplo de Requisição:**
-```bash
-# Listar todos
-curl "http://localhost:5000/api/coleta-pontos"
-
-# Com paginação (10 resultados, pulando os primeiros 20)
-curl "http://localhost:5000/api/coleta-pontos?limit=10&offset=20"
-```
-
-**Resposta (200 OK):**
-```json
-{
-  "total": 119,
-  "pontos": [
-    {
-      "id": "001",
-      "nome": "Zero Impacto Logística Reversa",
-      "tipo_lixo": "eletroeletronicos\\,eletrodomesticos\\,pilhas",
-      "latitude": -15.762421707078582,
-      "longitude": -47.935475219000324,
-      "endereco": "Saa Q 2 SETOR DE ABASTECIMENTO..."
-    },
-    ...
   ]
 }
 ```
@@ -125,40 +122,6 @@ Os testes unitários cobrem:
 - ✓ Tratamento de espaços em branco
 - ✓ Tratamento de arquivo não encontrado
 
-## Arquitetura
-
-### Estrutura de Arquivos
-
-```
-projeto-apc/
-├── app.py                      # Aplicação Flask com endpoints REST
-├── coleta_service.py           # Lógica de negócio (camada de serviço)
-├── test_coleta_service.py      # Testes unitários
-├── pontos-de-coleta.csv        # Dados dos pontos de coleta
-├── requirements.txt            # Dependências do projeto
-├── README.md                   # Este arquivo
-└── #Filtro de pontos.py        # Script original (legado)
-```
-
-### Padrões Utilizados
-
-1. **REST API Design**
-   - Recurso: `coleta-pontos` (plural)
-   - Operações: GET (leitura de dados)
-   - URIs descritivas e previsíveis
-   - Códigos HTTP apropriados
-
-2. **Camadas de Arquitetura**
-   - **Camada de Apresentação** (`app.py`): Endpoints HTTP
-   - **Camada de Negócio** (`coleta_service.py`): Lógica de filtro
-   - **Camada de Dados** (`pontos-de-coleta.csv`): Fonte de dados
-
-3. **Boas Práticas**
-   - Separação de responsabilidades
-   - Testes unitários sem dependência HTTP
-   - Tratamento de erros e exceções
-   - Documentação clara
-
 ## Tipos de Lixo Suportados
 
 - `eletroeletronicos`: Eletrônicos em geral
@@ -173,30 +136,55 @@ projeto-apc/
 ```python
 import requests
 
+# Listar todos os pontos (página 1)
+response = requests.get('http://localhost:5000/api/coleta-pontos')
+pontos = response.json()
+print(f"Total: {pontos['total']} pontos")
+print(f"Página {pontos['page']} de {pontos['total_pages']}")
+
 # Filtrar por um tipo
 response = requests.get(
     'http://localhost:5000/api/coleta-pontos',
     params={'tipos': 'pilhas'}
 )
 pontos = response.json()
+print(f"Encontrados {pontos['total']} pontos com pilhas")
 
-# Filtrar por múltiplos tipos
+# Ir para página 2
 response = requests.get(
     'http://localhost:5000/api/coleta-pontos',
-    params={'tipos': 'eletroeletronicos,pilhas'}
+    params={'page': 2}
 )
 pontos = response.json()
-print(f"Encontrados {pontos['total']} pontos")
+print(f"Mostrando página {pontos['page']} de {pontos['total_pages']}")
+
+# Filtrar e paginar
+response = requests.get(
+    'http://localhost:5000/api/coleta-pontos',
+    params={'tipos': 'eletroeletronicos,pilhas', 'page': 2}
+)
+pontos = response.json()
+print(f"Encontrados {pontos['total']} pontos com ambos os tipos")
 ```
 
 ### JavaScript (Fetch)
 
 ```javascript
+// Listar todos
+fetch('http://localhost:5000/api/coleta-pontos')
+  .then(res => res.json())
+  .then(data => console.log(`Página ${data.page} de ${data.total_pages}`));
+
 // Filtrar por tipo
 const tipos = 'eletroeletronicos,pilhas';
 fetch(`http://localhost:5000/api/coleta-pontos?tipos=${tipos}`)
   .then(res => res.json())
   .then(data => console.log(`${data.total} pontos encontrados`));
+
+// Navegar para página 2
+fetch('http://localhost:5000/api/coleta-pontos?page=2')
+  .then(res => res.json())
+  .then(data => console.log(`Mostrando ${data.pontos.length} pontos (página ${data.page} de ${data.total_pages})`))
 ```
 
 ## Notas

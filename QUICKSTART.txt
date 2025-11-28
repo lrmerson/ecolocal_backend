@@ -51,8 +51,11 @@
     # Filtrar por tipo
     curl "http://localhost:5000/api/coleta-pontos?tipos=pilhas"
 
-    # Listar todos (com limite)
-    curl "http://localhost:5000/api/coleta-pontos?limit=10"
+    # Ir para página 2
+    curl "http://localhost:5000/api/coleta-pontos?page=2"
+
+    # Filtrar e paginar
+    curl "http://localhost:5000/api/coleta-pontos?tipos=pilhas&page=2"
 
 
   OPÇÃO B: Com Python (requests)
@@ -108,8 +111,7 @@
   projeto-apc/
   │
   ├── app.py                      ← ⭐ Endpoints REST (Flask)
-  │   ├── GET /api/coleta-pontos?tipos=...
-  │   └── GET /api/coleta-pontos
+  │   └── GET /api/coleta-pontos [?tipos=...] [?limit=...] [?offset=...]
   │
   ├── coleta_service.py           ← ⭐ Lógica de Negócio
   │   └── ler_pontos_por_tipo_lixo()
