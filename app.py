@@ -3,7 +3,6 @@ from coleta_service import ler_pontos_por_tipo_lixo
 
 app = Flask(__name__)
 
-
 @app.route('/api/coleta-pontos', methods=['GET'])
 def coleta_pontos():
     """
@@ -31,8 +30,11 @@ def coleta_pontos():
         # Se tipos foi fornecido, filtrar por tipo
         tipos_param = request.args.get('tipos')
         if tipos_param:
+            user_lat = request.args.get('lat', type=float)
+            user_lon = request.args.get('lon', type=float)
+            n = request.args.get('n', default=5, type=int)
             tipos_lixo = [t.strip() for t in tipos_param.split(',')]
-            pontos_dict = ler_pontos_por_tipo_lixo(tipos_lixo)
+            pontos_dict = ler_pontos_por_tipo_lixo(tipos_lixo, user_lat, user_lon, n)
             pontos = list(pontos_dict.values()) if pontos_dict else []
             
             # Aplicar paginação se solicitado
