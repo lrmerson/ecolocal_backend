@@ -176,6 +176,33 @@ def mapa():
         
         pontos = list(pontos_dict.values()) if pontos_dict else []
         
+        # Adicionar mensagem se nenhum ponto foi encontrado com os filtros
+        if tipos_param and len(pontos) == 0:
+            tipos_texto = ', '.join(tipos_lixo)
+            aviso_html = f'''
+                <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+                            z-index: 9999; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+                            color: white; padding: 30px 40px; border-radius: 12px; 
+                            box-shadow: 0 10px 40px rgba(0,0,0,0.3); text-align: center;
+                            font-family: Arial, sans-serif; max-width: 500px;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">⚠️</div>
+                    <h2 style="margin: 0 0 15px 0; font-size: 22px; font-weight: bold;">
+                        Nenhum ponto encontrado
+                    </h2>
+                    <p style="margin: 0 0 10px 0; font-size: 16px; line-height: 1.5;">
+                        Não há pontos de coleta que aceitem <b>todos</b> os tipos selecionados simultaneamente:
+                    </p>
+                    <p style="margin: 0; font-size: 15px; background: rgba(255,255,255,0.2); 
+                              padding: 10px; border-radius: 6px; font-weight: 600;">
+                        {tipos_texto}
+                    </p>
+                    <p style="margin: 15px 0 0 0; font-size: 14px; opacity: 0.9;">
+                        💡 Tente selecionar menos tipos ou busque por tipos individualmente.
+                    </p>
+                </div>
+            '''
+            mapa.get_root().html.add_child(folium.Element(aviso_html))
+        
         # Adicionar marcadores ao mapa
         for ponto in pontos:
             lat = ponto['latitude']

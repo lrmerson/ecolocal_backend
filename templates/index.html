@@ -172,6 +172,11 @@
             margin-bottom: 0;
         }
 
+        /* Adicionar margem extra quando contém dropdown customizado */
+        .input-group:has(.custom-dropdown) {
+            margin-bottom: 40px;
+        }
+
         label {
             display: block;
             color: #e2e8f0;
@@ -210,6 +215,166 @@
             background: #1e293b;
             color: white;
             padding: 10px;
+        }
+
+        /* Estilo para checkboxes customizados */
+        .custom-dropdown {
+            position: relative;
+            width: 100%;
+        }
+
+        .dropdown-header {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .dropdown-header:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .dropdown-header.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .dropdown-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .checkbox-group {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin-top: 5px;
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 8px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .checkbox-group.show {
+            display: block;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 10px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-item:hover {
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #10b981;
+        }
+
+        .checkbox-item label {
+            cursor: pointer;
+            margin: 0;
+            text-transform: none;
+            font-weight: normal;
+            font-size: 1em;
+            letter-spacing: 0;
+            color: #e2e8f0;
+            flex: 1;
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+        }
+
+        .loading-overlay.show {
+            display: flex;
+        }
+
+        .loading-content {
+            text-align: center;
+            animation: fadeInUp 0.4s ease-out;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            border: 4px solid rgba(16, 185, 129, 0.2);
+            border-top: 4px solid #10b981;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #e2e8f0;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .loading-subtext {
+            color: #94a3b8;
+            font-size: 0.9em;
+        }
+
+        .loading-dots {
+            display: inline-block;
+        }
+
+        .loading-dots::after {
+            content: '.';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
         }
 
         .btn-container {
@@ -360,15 +525,39 @@
         <form class="form-group" onsubmit="irParaMapa(event)">
             <h3>⚙️ Suas Preferências</h3>
             
-            <div class="input-group">
-                <label for="tipoLixo">Tipo de Lixo (Opcional)</label>
-                <select id="tipoLixo" name="tipos">
-                    <option value="">Todos os tipos</option>
-                    <option value="eletroeletronicos">💻 Eletrônicos</option>
-                    <option value="eletrodomesticos">🔌 Eletrodomésticos</option>
-                    <option value="pilhas">🔋 Pilhas</option>
-                    <option value="lampadas">💡 Lâmpadas</option>
-                </select>
+            <div class="input-group" style="margin-bottom: 20px;">
+                <div class="checkbox-item" style="background: rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 12px;">
+                    <input type="checkbox" id="check_todos_pontos" onchange="toggleAllPoints()">
+                    <label for="check_todos_pontos" style="font-weight: 600; color: #10b981;">🗺️ Todos os pontos</label>
+                </div>
+            </div>
+            
+            <div class="input-group" id="tipo-lixo-group">
+                <label>Tipo de Lixo (Selecione um ou mais)</label>
+                <div class="custom-dropdown">
+                    <div class="dropdown-header" onclick="toggleDropdown()">
+                        <span id="dropdown-text">Selecione os tipos</span>
+                        <span class="dropdown-arrow">▼</span>
+                    </div>
+                    <div class="checkbox-group" id="checkbox-dropdown">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="check_eletroeletronicos" value="eletroeletronicos" onchange="updateDropdownText()">
+                            <label for="check_eletroeletronicos">💻 Eletrônicos</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="check_eletrodomesticos" value="eletrodomesticos" onchange="updateDropdownText()">
+                            <label for="check_eletrodomesticos">🔌 Eletrodomésticos</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="check_pilhas" value="pilhas" onchange="updateDropdownText()">
+                            <label for="check_pilhas">🔋 Pilhas</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="check_lampadas" value="lampadas" onchange="updateDropdownText()">
+                            <label for="check_lampadas">💡 Lâmpadas</label>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="input-group">
@@ -415,17 +604,110 @@
         </div>
     </div>
 
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <div class="loading-text">Carregando mapa<span class="loading-dots"></span></div>
+            <div class="loading-subtext">Calculando melhores rotas para você</div>
+        </div>
+    </div>
+
     <script>
+        // Função para ativar/desativar filtros ao marcar "Todos os pontos"
+        function toggleAllPoints() {
+            const todosCheckbox = document.getElementById('check_todos_pontos');
+            const tipoLixoGroup = document.getElementById('tipo-lixo-group');
+            const nPontosInput = document.getElementById('nPontos');
+            const dropdownHeader = document.querySelector('.dropdown-header');
+            
+            if (todosCheckbox.checked) {
+                // Desabilitar filtros
+                tipoLixoGroup.style.opacity = '0.5';
+                tipoLixoGroup.style.pointerEvents = 'none';
+                dropdownHeader.style.cursor = 'not-allowed';
+                
+                // Desmarcar todos os checkboxes de tipo
+                document.querySelectorAll('.checkbox-group input[type="checkbox"]').forEach(cb => {
+                    cb.checked = false;
+                });
+                updateDropdownText();
+                
+                // Desabilitar campo "n pontos"
+                nPontosInput.disabled = true;
+                nPontosInput.style.opacity = '0.5';
+                nPontosInput.style.cursor = 'not-allowed';
+            } else {
+                // Habilitar filtros
+                tipoLixoGroup.style.opacity = '1';
+                tipoLixoGroup.style.pointerEvents = 'auto';
+                dropdownHeader.style.cursor = 'pointer';
+                
+                // Habilitar campo "n pontos"
+                nPontosInput.disabled = false;
+                nPontosInput.style.opacity = '1';
+                nPontosInput.style.cursor = 'auto';
+            }
+        }
+
+        // Função para abrir/fechar o dropdown
+        function toggleDropdown() {
+            const dropdown = document.getElementById('checkbox-dropdown');
+            const header = document.querySelector('.dropdown-header');
+            const arrow = document.querySelector('.dropdown-arrow');
+            
+            dropdown.classList.toggle('show');
+            header.classList.toggle('active');
+            arrow.classList.toggle('open');
+        }
+
+        // Fechar dropdown ao clicar fora
+        document.addEventListener('click', function(event) {
+            const dropdown = document.querySelector('.custom-dropdown');
+            if (!dropdown.contains(event.target)) {
+                document.getElementById('checkbox-dropdown').classList.remove('show');
+                document.querySelector('.dropdown-header').classList.remove('active');
+                document.querySelector('.dropdown-arrow').classList.remove('open');
+            }
+        });
+
+        // Atualizar texto do dropdown baseado nas seleções
+        function updateDropdownText() {
+            const checkboxes = document.querySelectorAll('.checkbox-group input[type="checkbox"]:checked');
+            const dropdownText = document.getElementById('dropdown-text');
+            
+            if (checkboxes.length === 0) {
+                dropdownText.textContent = 'Selecione os tipos';
+            } else if (checkboxes.length === 1) {
+                const label = document.querySelector(`label[for="${checkboxes[0].id}"]`).textContent;
+                dropdownText.textContent = label;
+            } else {
+                dropdownText.textContent = `${checkboxes.length} tipos selecionados`;
+            }
+        }
+
         function irParaMapa(event) {
             if (event) event.preventDefault();
             
-            const tipoLixo = document.getElementById('tipoLixo').value;
-            const nPontos = document.getElementById('nPontos').value;
+            // Mostrar loading overlay
+            document.getElementById('loadingOverlay').classList.add('show');
             
-            // Mostrar indicador de carregamento
+            // Verificar se "Todos os pontos" está marcado
+            const todosPontos = document.getElementById('check_todos_pontos').checked;
+            
+            let tiposLixo = [];
+            if (!todosPontos) {
+                // Obter valores dos checkboxes marcados apenas se "Todos os pontos" não estiver marcado
+                const checkboxes = document.querySelectorAll('.checkbox-group input[type="checkbox"]:checked');
+                tiposLixo = Array.from(checkboxes).map(cb => cb.value);
+            }
+            
+            const nPontos = todosPontos ? null : document.getElementById('nPontos').value;
+            
+            // Mostrar indicador de carregamento no botão também
             const btn = event ? event.target : document.querySelector('.btn-primary');
             const textoOriginal = btn.textContent;
-            btn.textContent = '⏳ Obtendo localização...';
+            btn.textContent = '⏳ Carregando...';
             btn.disabled = true;
             
             // Solicitar geolocalização
@@ -439,10 +721,15 @@
                         let url = '/mapa';
                         const params = [];
                         
-                        if (tipoLixo) params.push(`tipos=${tipoLixo}`);
-                        if (nPontos) params.push(`n=${nPontos}`);
-                        params.push(`lat=${lat}`);
-                        params.push(`lon=${lon}`);
+                        if (!todosPontos) {
+                            if (tiposLixo.length > 0) params.push(`tipos=${tiposLixo.join(',')}`);
+                            if (nPontos) params.push(`n=${nPontos}`);
+                        }
+                        
+                        if (!todosPontos) {
+                            params.push(`lat=${lat}`);
+                            params.push(`lon=${lon}`);
+                        }
                         
                         if (params.length > 0) {
                             url += '?' + params.join('&');
@@ -457,8 +744,10 @@
                         let url = '/mapa';
                         const params = [];
                         
-                        if (tipoLixo) params.push(`tipos=${tipoLixo}`);
-                        if (nPontos) params.push(`n=${nPontos}`);
+                        if (!todosPontos) {
+                            if (tiposLixo.length > 0) params.push(`tipos=${tiposLixo.join(',')}`);
+                            if (nPontos) params.push(`n=${nPontos}`);
+                        }
                         
                         if (params.length > 0) {
                             url += '?' + params.join('&');
@@ -474,8 +763,10 @@
                 let url = '/mapa';
                 const params = [];
                 
-                if (tipoLixo) params.push(`tipos=${tipoLixo}`);
-                if (nPontos) params.push(`n=${nPontos}`);
+                if (!todosPontos) {
+                    if (tiposLixo.length > 0) params.push(`tipos=${tiposLixo.join(',')}`);
+                    if (nPontos) params.push(`n=${nPontos}`);
+                }
                 
                 if (params.length > 0) {
                     url += '?' + params.join('&');

@@ -22,8 +22,7 @@ if GOOGLE_API_KEY == "YOUR_GOOGLE_API_KEY":
 
 def get_distances_from_google(origin_lat, origin_lon, destinations):
     """
-    Chama a Google Routes API para obter distância e tempo de direção.
-    Obs: A Distance Matrix API foi descontinuada, usando Routes API agora.
+    Chama a Google Routes API v2 (Distance Matrix endpoint) para obter distância e tempo de direção.
     
     Args:
         origin_lat: Latitude do usuário
@@ -50,7 +49,7 @@ def get_distances_from_google(origin_lat, origin_lon, destinations):
 
     results = []
     
-    # Chamar a API para cada destino (Routes API não suporta múltiplos destinos em uma chamada)
+    # Processar cada destino individualmente
     for dest_lat, dest_lon in destinations:
 
         payload = {
@@ -136,7 +135,7 @@ def get_distances_from_google(origin_lat, origin_lon, destinations):
 
 def enriquecer_pontos_com_distancias(pontos, user_lat, user_lon):
     """
-    Adiciona distance_km e duration_min a cada ponto usando Google Routes API.
+    Adiciona distance_km e duration_min a cada ponto usando Google Routes API v2.
     
     Args:
         pontos: Dicionário de pontos {id: {latitude, longitude, ...}}
@@ -152,8 +151,8 @@ def enriquecer_pontos_com_distancias(pontos, user_lat, user_lon):
     # Extrair destinos como lista de tuplas (lat, lon)
     destinations = [(ponto['latitude'], ponto['longitude']) for ponto in pontos.values()]
     
-    # Obter distâncias da API Google Routes (processa todos os pontos)
-    print(f"Chamando API Google Routes para {len(destinations)} pontos...")
+    # Obter distâncias da API Google Routes v2
+    print(f"Chamando Google Routes API v2 para {len(destinations)} pontos...")
     results = get_distances_from_google(user_lat, user_lon, destinations)
     
     # Adicionar distância e duração a cada ponto
