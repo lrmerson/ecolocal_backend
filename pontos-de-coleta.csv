@@ -180,3 +180,68 @@ id,nome,tipo_lixo,latitude,longitude,endereco
 180,Drogasil Taguatinga,pilhas,-15.808472800961106,-48.080083026983324,St. Qi QI 19 - Taguatinga
 181,Drogasil Taguatinga,pilhas,-15.805248335879828,-48.062446557672224,St. D Norte QND 38 T Norte - Taguatinga
 182,Drogasil 111 Norte,pilhas,-15.752560363990739,-47.88949015766975,Asa Norte Comércio Local Norte 111 - Centro
+183,Drogasil Vicente Pires,pilhas,-15.793662199002993,-48.050960628706555,Rua 12 & Chácara 312-A 312A LT 1 LJ 2 3 St. Hab. Vicente Pires
+184,Drogasil Guará,pilhas,-15.835527600574144,-47.979007834250176,Guará II Ql 25 Cl EDIFICIO REAL MIX LT-A LJS 19 TERREO - Guará II
+185,Drogasil Taguatinga,pilhas,-15.82569974283348,-48.05935546315145,Taguatinga Norte QNA 16 - Taguatinga
+186,Drogasil Vicente Pires,pilhas,pilhas,-15.808244193784263,-48.02019814422409,St. Hab. Vicente Pires lote 8 loja 1 - Vicente Pires
+187,Drogasil Gama,pilhas,-16.01849032116373,-48.06608156822848,SETOR SCC BLOCO 3 0 - LT 21/39 LOJA B TÉRREO DEP 02 SUBSOLO - Gama
+188,Kalunga Asa Sul,pilhas,-15.794107041765216,-47.89240660017758,SCS Quadra 8 - Shopping Venâncio Asa Sul
+189,Kalunga Shopping ID,pilhas,-15.78820927488799,-47.883179255743634,Setor Comercial Norte Q 6 Setor Comercial Norte - Asa Norte
+190,Kalunga Asa Norte,pilhas,-15.787238626132092,-47.88316241835754,SCN Q 1 Bloco C - Asa Norte
+191,Kalunga Shopping Iguatemi Brasília,pilhas,-15.720670654468416,-47.88468949425756,ST SHIN CA 04 BL A Loja 183 - Shopping Iguatemi
+192,Kalunga Taguatinga Shopping,pilhas,-15.84067397459434,-48.04363456131629,QS 01 Shopping Taguatinga - Taguatinga
+193,Leroy Merlin Brasília Norte,pilhas,-15.75216837891819,-47.928149130852674,SOFN - Área Especial
+194,Leroy Merlin Brasília Sul,pilhas,-15.834805756656987,-47.950591987069885,Guará I Trecho 3 - Plano Piloto
+195,Leroy Merlin Taguatinga,pilhas,-15.843589046108526,-48.04182110028472,QS 3 - Taguatinga
+196,CLNW 10/11,pilhas,-15.742266748868882,-47.91296575553444,SHCNW SQNW - Plano Piloto
+197,Eletrônica Asakazu,pilhas,-15.818854463501822,-47.89989111308389,Asa Sul CLS 208 BL B Loja 16 - Asa Sul
+198,Metrô Águas Claras,pilhas,-15.839486815760582,-48.02843175915634,Águas Claras
+199,Metrô Ceilândia Centro,pilhas,-15.821777750403633,-48.11207143246466,St. N CNN 2 - Ceilândia
+200,Metrô Guará,pilhas,-15.825738934411433,-47.98278682793528,Guará I QE 22 - Guará
+201,Metrô Ceilândia,pilhas,-15.805076486503118,-48.121298036055244,St. N QNN 13 - Ceilândia
+202,Metrô Estação Samambaia,pilhas,-15.873421047850435,-48.08484953372621,Área Especial 1ª Avenida Sul Centro Urbano - Samambaia
+203,Ministério da Ciência Tecnologia e Inovação - MCTI,pilhas,-15.799636683183929,-47.869993291399226,Bloco E Zona Cívico-Administrativa Esplanada dos Ministérios
+204,Parque Ecológico dos Jequitibás,pilhas,-15.640845579782068,-47.78868429139922,Quadra 10/11, Avenida do Contorno - Sobradinho
+205,Rodoviaria Plano Piloto,pilhas,-15.793010285180687,-47.88279099139921,Eixo Rodoviário de Brasília - Plano Piloto
+206,Senado Federal,pilhas,-15.79896274725224,-47.86406973558175,Praça dos Três Poderes - Plano Piloto
+207,Senac Ceilândia DF,pilhas,-15.81971112817658,-48.11016879139921,14, Ceilândia Norte QNN 1 - Ceilândia
+208,Sesc 913 Sul,pilhas,-15.820218483848832,-47.92211094721668,SEPS Q 713/913 Quadra 713/913 - Asa Sul
+209,Sesc Ceilândia,pilhas,-15.82004763876127,-48.12231836256271,QNN 27 Área Especial S/N Ceilândia Norte QNN 27 Área Especial Lote B - Ceilândia
+210,Sesc Gama,pilhas,-16.01008343197213,-48.059493106745236,Setor Leste Industrial Lotes 620 a 680 QI 1 - Gama
+211,Sesc Taguatinga Norte,pilhas,-15.819070912612911,-48.06240276441825,St. B Norte CNB 12 Área Especial 2/3 Área Especial 2/3 - Taguatinga
+212,Sesc Taguatinga Sul,pilhas,-15.866271037599086,-48.03697804907223,St. F Sul Área Especial 3 - Taguatinga
+213,Senai Gama,pilhas,-16.026575680348067,-48.07461044907223,St. Sul EQ 2/8 - Gama
+214,FIBRA - Federação das Indústrias do Distrito Federal,pilhas,-15.802658116580265,-47.95324330674525,SIA Trecho 3 - Zona Industrial
+215,SESI - SENAI Sobradinho,pilhas,-15.641213285702593,-47.787722133726206,Q 13 Área Especial 3 Lotes A/F
+216,Sindicato dos Bancários e Teatro dos Bancários,pilhas,-15.826016234936983,-47.92355154721669,Asa Sul Eqs 314/315 BL A - Asa Sul
+217,ADUnB Associação dos Docentes da UnB e UnB Secretaria de Gestão Patrimonial - SPI -UnB,pilhas,-15.76670289531071,-47.872289635581744,Campus Universitário Darcy Ribeiro - Gleba A - Casa do Professor - Asa Norte
+218,Universidade de Brasília - Campus Ceilândia,pilhas,-15.843776284147626,-48.10162762209126,Ceilândia Sul Campus Universitário - Centro Metropolitano
+219,Universidade de Brasília - Campus Planaltina,pilhas,-15.600761160111073,-47.657919564418265,Vila NS de Fátima - Vila Nossa Sra. de Fátima
+220,Centro Universitário Unieuro - Campus Águas Claras,pilhas,-15.831565266050589,-48.03695262023571,Av. das Castanheiras s/n - Lote 3700 - Águas Claras
+221,Drogaria Pacheco Asa Sul,pilhas,-15.814838909406285,-47.90273446441825,Asa Sul CLS 107 - Asa Sul
+222,Drogaria Pacheco 112 Sul,pilhas,-15.823060320317587,-47.91339750488969,Asa Sul CLS 111 - Asa Sul
+223,Drogaria Pacheco 302 Sul,pilhas,-15.800858414286044,-47.890781606745236,Q CLS 302 BLOCO A loja 33 E 37 Sloja 34 SHCS
+224,Drogaria Pacheco 304 Sul,pilhas,-15.807726230759712,-47.89646572209127,SHCS CLS 304 Loja 04 BL Q Bloco A - Plano Piloto
+225,Drogaria Pacheco 407 Sul,pilhas,-15.81896352489282,-47.8952410202357,19 SHCS CLS 407 D Brasília
+226,Drogaria Pacheco 413 Sul,pilhas,-15.830993052734746,-47.9114943048897,Bloco D Q, SHCS CLS 413 - Asa Sul
+227,Drogaria Pacheco Aguas Claras,pilhas,-15.842707003845938,-48.02191736256271,Q 205 02 LJS 14 E 15, S/N - Águas Claras
+228,Drogaria Pacheco Aguas Claras,pilhas,-15.835142079706364,-48.01904057790874,Q. 104 - Águas Claras
+229,Drogaria Pacheco Aguas Claras,pilhas,-15.839294998962636,-48.01879537790873,EDIF REAL QUA Avenida das Araucárias 1325 loja 08 E 09 Av. das Araucárias LOTE 1325 - loja 08 E 09 - Águas Claras
+230,Drogaria Pacheco Aguas Claras,pilhas,-15.840480222056744,-48.02290929139921,R. 19 Sul 16 - LJ 5 - SUL
+231,Drogaria Pacheco 113 Norte,pilhas,-15.746347866329733,-47.89145344907223,0 SHCN CLN 113 - Asa Norte
+232,Drogaria Pacheco Asa Norte,pilhas,-15.750676220539967,-47.884611735581736,Asa Norte SCLN - Asa Norte
+233,Drogaria Pacheco Asa Norte,pilhas,-15.77420275555594,-47.886657649072234,Asa Norte CLN 305 BL E SALA 218 - Asa Norte
+234,Drogaria Pacheco Asa Norte,pilhas,-15.762365314512966,-47.889700404889695,Q CLN 309 BLOCO E loja01 loja02 loja11 loja12 SL103 SUBSL loja16 - Asa Norte
+235,Drogaria Pacheco Asa Norte,pilhas,-15.743446867576807,-47.8946165337262,Q CLN 315 BLOCO B 54 loja 12 16 20 30 E 34
+236,Drogaria Pacheco Asa Norte,pilhas,-15.779849814048365,-47.87554143558174,Q CLN 402 BLOCO D SN - PARTE AASA
+237,Drogaria Pacheco Asa Norte,pilhas,-15.765782693999753,-47.87716589139921,Asa Norte Comércio Local Norte 407 - D
+238,Drogaria Pacheco Asa Sul,pilhas,-15.804041802052708,-47.88546745092777,Asa Sul CLS 201 - Asa Sul
+239,Drogaria Pacheco 209 sul,pilhas,-15.822935520151905,-47.90475866256271,Asa Sul CLS 209 BLOCO C - Plano Piloto
+240,Drogaria Pacheco Asa Sul,pilhas,-15.83507507125081,-47.92093937790873,BL D - SCLS QUADRA 216 - Asa Sul
+241,Drogaria Pacheco Lago Sul,pilhas,-15.85706316550418,-47.83250043558174,SMDB Conjunto 12 Bloco H Loja 105 - Lago Sul
+242,Drogaria Pacheco Lago Sul,pilhas,-15.84284719819725,-47.87685856417017,Q SHIS, SETOR DE HABIT.INDIVIDUAIS SUL QI 13 Bloco J LJS 4/5 E 6 EDIFIC
+243,Drogaria Pacheco Asa Sul,pilhas,-15.754753226369875,-47.88766843942968,Loja 08 10 12 & 14 St. de Habitações Individuais Sul - Ind. Sul
+244,Drogaria Pacheco SAnta Maria,pilhas,-16.004864527792968,-47.99617602023571,Lote D Av. Alagado Cl 116 S/N - Santa Maria
+245,Drogaria Pacheco Asa Sul,pilhas,-15.797940916288727,-47.88653826256271,Setor Comercial Sul Q. 1 - Asa Sul
+246,Drogaria Pacheco Asa Sul,pilhas,-15.833539555987096,-47.95527760488969,R SAI/SO AREA 6580 - Asa Sul
+247,Drogaria Pacheco Sudoeste,pilhas,-15.797587326264312,-47.92566645581747,Q CLSW 300B BLOCO 4 LJ 5/6/7 E 8 TERREO
