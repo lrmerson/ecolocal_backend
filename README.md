@@ -18,6 +18,19 @@ python app.py
 
 A aplicação estará disponível em `http://localhost:5000`
 
+## Arquitetura e Fluxo da Aplicação
+
+![Diagrama de Fluxo](docs/fluxo-aplicacao.png)
+
+O diagrama acima ilustra o fluxo completo da aplicação:
+
+1. **Usuário** acessa a página inicial e interage via navegador
+2. **Frontend** (Flask/HTML) processa a solicitação via HTTP
+3. **Backend** (Python) filtra pontos do CSV e cria dicionário
+4. **Google Routes API v2** calcula distâncias e durações de rotas
+5. **Resposta** enriquecida com informações de distância/duração
+6. **Mapa interativo** exibido ao usuário com pontos mais próximos
+
 ## Endpoint
 
 ### Gerenciar Pontos de Coleta
@@ -52,7 +65,7 @@ curl "http://localhost:5000/api/coleta-pontos?page=2"
 # Filtrar e ir para página 3
 curl "http://localhost:5000/api/coleta-pontos?tipos=pilhas&page=3"
 
-# Encontrar 3 pontos mais próximos (via Google Distance Matrix API)
+# Encontrar 3 pontos mais próximos (via Google Routes API v2)
 curl "http://localhost:5000/api/coleta-pontos?tipos=pilhas&lat=-23.5505&lon=-46.6333&n=3"
 
 # Encontrar 5 pontos mais próximos de qualquer tipo
@@ -111,7 +124,7 @@ Com filtro por tipo:
 }
 ```
 
-Com filtro por proximidade (Google Distance Matrix API):
+Com filtro por proximidade (Google Routes API v2):
 ```json
 {
   "total": 3,
@@ -262,19 +275,19 @@ fetch('http://localhost:5000/api/coleta-pontos?tipos=pilhas&lat=-23.5505&lon=-46
   });
 ```
 
-## Integração com Google Distance Matrix API
+## Integração com Google Routes API v2
 
 ### Configuração Necessária
 
 1. Obtenha uma chave de API do Google:
    - Acesse [Google Cloud Console](https://console.cloud.google.com/)
    - Crie um novo projeto
-   - Ative a API "Distance Matrix"
+   - Ative a API "Routes API"
    - Crie uma chave de API
 
-2. Configure a chave em `coleta_service.py`:
-   ```python
-   GOOGLE_API_KEY = "sua_chave_api_aqui"
+2. Configure a chave como variável de ambiente:
+   ```bash
+   export GOOGLE_API_KEY="sua_chave_api_aqui"
    ```
 
 3. Instale dependências:
@@ -284,11 +297,11 @@ fetch('http://localhost:5000/api/coleta-pontos?tipos=pilhas&lat=-23.5505&lon=-46
 
 ### Como Funciona
 
-- Quando `lat` e `lon` são fornecidos, a API chama Google Distance Matrix para calcular:
+- Quando `lat` e `lon` são fornecidos, a API chama Google Routes API v2 (computeRouteMatrix) para calcular:
   - `distance_km`: Distância em quilômetros via dirigindo
   - `duration_min`: Tempo de direção em minutos
 - O parâmetro `n` retorna apenas os N pontos com menor `duration_min` (tempo de direção)
-- Usa chunking para lidar com limite de 25 destinos por requisição da Google API
+- Usa endpoint de Distance Matrix da Routes API v2 com configuração IPv4-only para melhor performance
 
 ## Notas
 

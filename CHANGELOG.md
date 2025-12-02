@@ -1,10 +1,10 @@
 # Resumo das Alterações - REST API Implementation
 
-## Versão 1.1 - Google Distance Matrix API Integration
+## Versão 1.1 - Google Routes API v2 Integration
 
 ### Novas Funcionalidades
 
-1. **Integração com Google Distance Matrix API**
+1. **Integração com Google Routes API v2**
    - Cálculo de distância e tempo de direção em tempo real
    - Função `get_distances_from_google()` para chamar Google API
    - Função `enriquecer_pontos_com_distancias()` para orquestração
@@ -12,7 +12,7 @@
 2. **Filtro por Proximidade**
    - Novos parâmetros: `lat`, `lon`, `n`
    - Retorna N pontos mais próximos com tempo de direção mínimo
-   - Suporta chunking para limite de 25 destinos da API
+   - Processa destinos individualmente com endpoint computeRouteMatrix
 
 3. **Novos Campos de Resposta**
    - `distance_km`: Distância em quilômetros
@@ -32,7 +32,7 @@
 
 ### Requisitos
 
-- Google Cloud account com Distance Matrix API habilitada
+- Google Cloud account com Routes API habilitada
 - API key do Google
 - Pacote requests instalado
 

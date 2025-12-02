@@ -11,7 +11,7 @@
    - Função `get_distances_from_google()` para Google API
    - Função `enriquecer_pontos_com_distancias()` para orquestração
    - Função `pontos_mais_proximos()` para filtrar N mais próximos
-   - Integração com Google Distance Matrix API
+   - Integração com Google Routes API v2
    - Independente de HTTP
    - Tratamento robusto de erros
    - Docstrings completas em Português
@@ -84,7 +84,7 @@
 - Framework: Flask
 - Padrão REST: Resource-based URIs, HTTP methods, status codes
 - Formato: JSON
-- Suporta filtro de proximidade via Google Distance Matrix API
+- Suporta filtro de proximidade via Google Routes API v2
 - Parâmetros: tipos, page, lat, lon, n
 
 ### ✅ Boas Práticas REST API Design
@@ -124,7 +124,7 @@
 | Exemplos de uso | 9 |
 | Documentação (linhas) | 600+ |
 | Funções Google API | 3 |
-| Integração Google Distance Matrix | Sim ✓ |
+| Integração Google Routes API v2 | Sim ✓ |
 
 ---
 
@@ -208,7 +208,7 @@ GET /api/coleta-pontos [?tipos=...] [?page=...] [?lat=...] [?lon=...] [?n=...]
     Se lat/lon fornecidos:
     ├─ [enriquecer_pontos_com_distancias()]
     ├─ [get_distances_from_google()]
-    └─ [Google Distance Matrix API]
+    └─ [Google Routes API v2]
          ↓
     [pontos-de-coleta.csv]
     - Dados (246 pontos)

@@ -9,10 +9,10 @@ REQUISITOS FUNCIONAIS
     - 1 endpoint REST consolidado
     - Framework: Flask
 
-[✓] Integração com Google Distance Matrix API
+[✓] Integração com Google Routes API v2
     - Função get_distances_from_google() implementada
     - Função enriquecer_pontos_com_distancias() para orquestração
-    - Chunking para 25 destinos por requisição
+    - Processamento individual com computeRouteMatrix
     - Parâmetros lat/lon/n suportados
     - Campos distance_km e duration_min retornados
 
@@ -235,9 +235,9 @@ FUNCIONALIDADES EXTRAS
     - Menu de opções
 
 [✓] Filtro de Proximidade
-    - Google Distance Matrix API
+    - Google Routes API v2
     - Cálculo de tempo de direção
-    - Chunking para múltiplos pontos
+    - Processamento individual de pontos
     - Ordenação por proximidade
 
 
@@ -261,7 +261,7 @@ COMPATIBILIDADE
 [✓] Flask 3.0.0+
 [✓] Módulo CSV (built-in)
 [✓] Módulo JSON (built-in)
-[✓] Google Distance Matrix API
+[✓] Google Routes API v2
 [✓] requests 2.31.0+
 
 
@@ -329,7 +329,7 @@ NOTAS
 
 - Estrutura modular facilita manutenção e evolução
 
-- Google Distance Matrix API usa chunking para 25 destinos por requisição
+- Google Routes API v2 processa destinos individualmente com configuração IPv4-only para melhor performance
 
 - Proximidade é calculada por tempo de direção, não distância em linha reta
 

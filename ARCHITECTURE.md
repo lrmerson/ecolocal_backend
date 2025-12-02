@@ -1,5 +1,9 @@
 # Configuração do Projeto
 
+## Diagrama de Fluxo da Aplicação
+
+![Diagrama de Fluxo](docs/fluxo-aplicacao.png)
+
 ## Ambiente de Desenvolvimento
 
 ### Estrutura do Projeto
@@ -42,7 +46,7 @@ Cliente HTTP
     ↓
 [Se lat/lon fornecidos: Chamar enriquecer_pontos_com_distancias()]
     ↓
-[Google Distance Matrix API (com chunking)]
+[Google Routes API v2 - computeRouteMatrix]
     ↓
 [Adicionar distance_km e duration_min]
     ↓
@@ -150,22 +154,24 @@ curl "http://localhost:5000/api/coleta-pontos?tipos=pilhas&page=2"
 - Sem queries desnecessárias
 - Possibilidade de paginação
 
-## Integração com Google Distance Matrix API
+## Integração com Google Routes API v2
 
 ### Implementado
 
-- ✓ Função `get_distances_from_google()` para chamar API
+- ✓ Função `get_distances_from_google()` para chamar API (computeRouteMatrix)
 - ✓ Função `enriquecer_pontos_com_distancias()` para orquestração
-- ✓ Chunking para lidar com limite de 25 destinos
+- ✓ Configuração IPv4-only para resolver problemas de timeout no Windows
 - ✓ Tratamento de erros com fallback
 - ✓ Campos `distance_km` e `duration_min` nas respostas
 - ✓ Ordenação por tempo de direção para encontrar pontos próximos
+- ✓ Headers necessários (X-Goog-Api-Key, X-Goog-FieldMask)
 
 ### Requisitos
 
-- Chave de API do Google (Distance Matrix API habilitada)
+- Chave de API do Google (Routes API habilitada)
 - Pacote `requests` instalado
 - Coordenadas de latitude/longitude válidas do usuário
+- Variável de ambiente GOOGLE_API_KEY configurada
 
 ## Próximas Melhorias Possíveis
 
